@@ -5,9 +5,20 @@ Tipologia i cicle de vida de les dades del Màster universitari de Ciència de
 dades impartit per la Universitat Oberta de Catalunya (UOC).
 
 En aquest cas s'ha escollit agafar les dades de la lliga espanyola de futbol.
-L'extracció de dades s'ha realitzat sobre el web http : //www.resultados-futbol.com
+L'extracció de dades s'ha realitzat sobre el web http://www.resultados-futbol.com
 el qual té un històric de totes les jornades de la lliga espanyola des del seu
 inici l'any 1929 fins a l'actualitat.
+
+La motivació en aquest projecte ve donada arran de situacions quotidianes on
+diem que guanyarà un equip o un altre basant-nos solament amb el nom de l'equip.
+Per exemple, si es fes una enquesta on és preguntes "Qui guanyarà el partit
+Barcelona-Eibar?" és molt probable que hagis respost Barcelona, solament pel
+renom que té i la carrera que porta com a club. Basant-me en aquest fet,
+m'agradaria generar un dataset on es recollís els partits jugats en la
+lliga espanyola juntament amb el seu resultat. En aquesta assignatura no es
+contempla la creació de model predictius, però la idea seria crear un model
+que fes prediccions d'acord amb els noms dels equips que s'enfronten i digués quin dels dos
+és més probable que guanyi.
 
 M'agradaria agrair a l'equip de resultados-futbol per oferir totes les dades
 necessàries per la realització d'aquesta pràctica. S'ha de dir que ofereixen
@@ -17,7 +28,7 @@ dit, en aquest cas es farà ús d'un web scraper per la recol·lecció de les da
 ## Preliminars
 ### Robots.txt
 Durant la realització d'aquesta pràctica, el fitxer 
-[robots.txt](https : //resultados.elpais.com/robots.txt) era el següent. 
+[robots.txt](https://resultados.elpais.com/robots.txt) era el següent. 
 
 ```
 User-agent :  *
@@ -54,7 +65,7 @@ Disallow :
 ```
 
 **Important** :  En utilitzacions futures, cal revisar l'arxiu 
-[robots.txt](https : //resultados.elpais.com/robots.txt) de  nou per comprovar 
+[robots.txt](https://resultados.elpais.com/robots.txt) de  nou per comprovar 
 que se segueix tenint permís per extraure les dades del web.
  
 ### Estructura HTML d'un partit
