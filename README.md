@@ -36,29 +36,30 @@ https://github.com/data-science-env/Football-Scraper
 
 #### Estructura
 Football-Scraper  
-├── chromedriver_78.exe  
-├── football_spanish_league.csv  
 ├── logos  
 │   ├── equip1.jpg  
 │   ├── equip2.jpg  
-│   ├── equipN.jpg  
-├── models.py  
+│   └── equipN.jpg  
+├── src  
+│   ├── chromedriver_78.exe  
+│   ├── models.py  
+│   └── scraper.py  
+├── football_spanish_league.csv  
 ├── PRA1-Web Scraping.pdf  
 ├── README.md  
-├── requirements.txt  
-└── scraper.py  
+└── requirements.txt 
 
 #### Descripció
-* `chromedriver_78.exe` s'utilitza per a executar l'exemple de Selinux.
-* `football_spanish_league.csv` dataset generat.
-* `logos` es la carpeta que conté els logos dels diferents equips en 
-format jpg
-* `models.py` conté les diferents classes utilitzades per representar
+* `logos` conté els logos dels diferents equips en format jpg
+* `src/chromedriver_78.exe` s'utilitza per a executar l'exemple de Selinux.
+* `src/models.py` conté les diferents classes utilitzades per representar
 el objectes de Equip, Jornada i Lliga.
-* `PRA1-Web Scraping.pdf` 
+* `src/scraper.py` conté el proces principal per generar el dataset.
+* `football_spanish_league.csv` dataset generat com a solució de la practica.
+* `PRA1-Web Scraping.pdf` conté la documentació de la practica. 
+El contingut es el mateix que aquest README.
 * `README.md` conté l'informació del projecte.
 * `requirements.txt` conté les dependencies per poder executar el projecte.
-* `scraper.py` conté el proces principal per generar el dataset.
 
 ### Executar el web scraper
 ``` bash
@@ -70,7 +71,7 @@ source env/bin/activate
 pip install -r requirements.txt
 
 # Executar scraper
-python scraper.py [-h] [--selenium] [--no_data]
+python src/scraper.py [-h] [--selenium] [--no_data]
 ```
 Arguments:
 * -h, --help  mostra un missatge d'ajuda

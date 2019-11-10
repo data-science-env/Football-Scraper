@@ -141,8 +141,8 @@ def selenium_example():
     info = browser.find_element_by_id("info").text.split()
     username = info[0]
     print('Username', username)
-    isConnected = info[1] == 'Conectado'
-    print('Is Connected?', isConnected)
+    is_connected = info[1] == 'Conectado'
+    print('Is Connected?', is_connected)
 
     points = browser.find_element_by_class_name("points").text
     print('Points', points)
