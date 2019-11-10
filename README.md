@@ -25,8 +25,8 @@ necessàries per la realització d'aquesta pràctica. S'ha de dir que ofereixen
 una API de pagament per fer consultes directes de les dades, però com bé s'ha
 dit, en aquest cas es farà ús d'un web scraper per la recol·lecció de les dades.
 
-## Preliminars
-### Robots.txt
+
+## Robots.txt
 Durant la realització d'aquesta pràctica, el fitxer 
 [robots.txt](https://resultados.elpais.com/robots.txt) era el següent. 
 
@@ -68,13 +68,13 @@ Disallow :
 [robots.txt](https://resultados.elpais.com/robots.txt) de  nou per comprovar 
 que se segueix tenint permís per extraure les dades del web.
  
-### Estructura HTML d'un partit
+## Estructura HTML d'un partit
  
  ```
 <tr class="vevent">
     <td class="fecha">10 Feb 29</td>
     <td class="equipo1">
-        <a href="/Arenas-Club/1929" title="Arenas"><img width="18" src="https : //thumb.resfu.com/img_data/escudos/small/4657.jpg?size=37x&amp;5" alt="Arenas de Getxo">Arenas</a>
+        <a href="/Arenas-Club/1929" title="Arenas"><img width="18" src="https://thumb.resfu.com/img_data/escudos/small/4657.jpg?size=37x&amp;5" alt="Arenas de Getxo">Arenas</a>
     </td>
     <td class="rstd">
         <span class="summary hidden" title="Arenas - Atlético">Arenas - Atlético</span>
@@ -84,29 +84,76 @@ que se segueix tenint permís per extraure les dades del web.
 
         <a class="url" href="/partido/Arenas-Club/Atletico-Madrid/1929">2&nbsp;-&nbsp;3</a> </td>
     <td class="equipo2">
-        <a href="/Atletico-Madrid/1929" title="Atlético"><img width="18" src="https : //thumb.resfu.com/img_data/escudos/small/369.jpg?size=37x&amp;5" alt="Atlético">Atlético</a>
+        <a href="/Atletico-Madrid/1929" title="Atlético"><img width="18" src="https://thumb.resfu.com/img_data/escudos/small/369.jpg?size=37x&amp;5" alt="Atlético">Atlético</a>
     </td>
     <td class="cmm"><a class="c" href="/partido/Arenas-Club/Atletico-Madrid/1929">5</a></td>
 </tr>
  ```
  
+Com podem observar l'estructura és ben clara. El **primer** element 
+marcat amb *class="fecha"* correspon a data en la qual es va jugar el 
+partit de futbol. El **segon** element marcat amb *class="equipo1"* 
+conté la informació de l'equip 1. En aquest cas s'ha agafat el nom de 
+l'equip juntament amb el seu escut (logo). El **tercer** element marcat 
+amb *class="rstd"* conté informació del partit. D'aquest element s'ha 
+agafat l'estadi on es va disputar el partit i el resultat. El **quart** 
+element marcat amb *class="equipo2"* segueix el mateix esquema que 
+l'equip 1. Per últim apareix el nombre de comentaris que s'ha fet 
+sobre el partit els quals no s'han agafat, ja que no apareixen enlloc.
+ 
 ## Contingut dataset
-El dataset generat conte les dades dels partits de futbol de la lliga espanyola
+El dataset generat conté les dades dels partits de futbol de la lliga espanyola
 des de la temporada 1929 fins a la temporada 2020. Cal destacar que no hi han
-dades dels anys 1937, 1938, i 1938, ja que a causa de la guerra civil que va patir
+dades dels anys 1937, 1938, i 1939, ja que a causa de la guerra civil que va patir
 Espanya no va haver-hi lliga.
  
- A continuació es mostren capçaleres del dataset juntament amb el tipus de valor que contenen.
+A continuació es mostren les capçaleres del dataset juntament amb el tipus de valor que contenen.
  
 * year : numeric
 * jornada : numeric
 * date : string
 * stadium : string
 * teamA : string
+* logo_teamA : string
 * teamB : string
+* logo_teamB : string
 * scoreTeamA : numeric
 * scoreTeamB : numeric
 * winner : string
 * winnerAsNumeric : numeric
- 
- 
+
+Com es pot veure, s'han guardat els logos de l'equip A i l'equip B. En
+el dataset surten representats amb el nom del fitxer que conte la imatge.
+A la carpeta logos, estan tots els logos dels diferents equips. Els logos
+segueixen tots el format nom_equip.jpg, per exemple, el fitxer amb el 
+logo l'equip Eibar s'anomena Eibar.jpg.
+
+## Aspectes a destacar
+
+* S'han modificat les capçaleres del scraper per tal de fer-nos 
+passar per un navegador. Utilitzant el següent 
+[link](https://www.google.com/search?q=my+user+agent&oq=my+user+agent) 
+podem saber el *user agent* del nostre navegador.
+* S'han fet ús de temporitzadors per tal de no saturar el servidor amb
+les peticions.
+* S'han emmagatzemat els escuts dels diferents equips en format jpg i 
+s'ha afegit el nom del fitxer al csv. Per tal de no descarregar cada 
+vegada l'escut d'un equip s'ha posat una mesura per detectar si ja 
+s'havia descarregat anteriorment.
+* Fent ús de Selenium s'ha gestionat el login de la pagina. L'usuari 
+que s'utilitza és *scraper* i la contrasenya *scraper*. Evidentment 
+és un usuari vàlid i a la vegada fals. S'ha utilitzat un 
+[correu temporal](https://10minutemail.com/) per al registre.
+* El programa gestiona quan hi han problemes inesperats com podria ser
+la caiguda de connexió amb el servidor.
+
+
+A mode d'exemple, s'ha utilitzat Selenium per fer login en la mateixa
+pàgina que s'ha realitzat la pràctica. Solament s'ha utilitzat per
+recuperar informació bàsica de l'usuari. En cap moment s'ha utilitzat
+per generar cap dataset nou. Per poder fer ús de Selenium s'ha hagut 
+de descarregar un driver de Chorme des del següent 
+[link](https://sites.google.com/a/chromium.org/chromedriver/downloads).
+En el meu cas he descarregat el driver per a la versió 78 de Chrome 
+el qual deixo en aquesta mateixa carpeta.
+

@@ -23,7 +23,9 @@ class Match:
                  score_team_B):
 
         self.team_A = team_A
+        self.logo_team_A = team_A + '.jpg'
         self.team_B = team_B
+        self.logo_team_B = team_B + '.jpg'
         self.score_team_A = score_team_A
         self.score_team_B = score_team_B
         self.date = date
@@ -46,11 +48,13 @@ class Match:
             return 2
 
     def __str__(self):
-        return "{} {} {} vs {} --- {}-{} ({} {})".format(self.date,
-                                                         self.stadium,
-                                                         self.team_A,
-                                                         self.team_B,
-                                                         self.score_team_A,
-                                                         self.score_team_B,
-                                                         self.get_winner(),
-                                                         self.get_winner_as_numeric())
+        return "{} {} {}({}) vs {} ({}) --- {}-{} ({} {})".format(self.date,
+                                                                  self.stadium,
+                                                                  self.team_A,
+                                                                  self.logo_team_A,
+                                                                  self.team_B,
+                                                                  self.logo_team_B,
+                                                                  self.score_team_A,
+                                                                  self.score_team_B,
+                                                                  self.get_winner(),
+                                                                  self.get_winner_as_numeric())

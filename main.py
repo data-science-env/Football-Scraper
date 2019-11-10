@@ -1,11 +1,24 @@
+import os
+import sys
 import time
-from urllib.request import urlopen
-
+import urllib
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from urllib.request import urlopen
 
 from models import Match, Jornada, League
 
 base_url = "http://www.resultados-futbol.com/primera{}/grupo1/calendario"
+
+
+def handle_team_logo(team_name, link):
+    path = '%s/%s.jpg' % (logos_folder_name, team_name)
+    if not os.path.isfile(path):
+        txt = open(path, "wb")
+        download_img = urlopen(link)
+        print(team_name, link)
+        txt.write(download_img.read())
+        txt.close()
 
 
 def get_match(tr):
@@ -17,6 +30,7 @@ def get_match(tr):
 
     date = date_td.text.strip()
     team_A = teamA_td.a.text.strip()
+    handle_team_logo(team_A, teamA_td.a.img['src'])
     team_B = teamB_td.a.text.strip()
     score = score_td.a.text
     if score.find('-') == -1:
@@ -37,24 +51,22 @@ def get_jornada(caja):
     return Jornada(id, matches)
 
 
-def league_to_csv(league, filename='dataset'):
-    f = open(filename + '.csv', "r+", encoding="utf8")
-    if len(f.readline()) == 0:
-        print(
-            "year,jornada,date,stadium,teamA,teamB,scoreTeamA,scoreTeamB,winner,winnerAsNumeric",
-            file=f)
+def league_to_csv(league):
     for jornada in league.jornadas:
         for match in jornada.matches:
             print(
-                "{},{},{},{},{},{},{},{},{},{}".format(league.year, jornada.id,
-                                                       match.date,
-                                                       match.stadium,
-                                                       match.team_A,
-                                                       match.team_B,
-                                                       match.score_team_A,
-                                                       match.score_team_B,
-                                                       match.get_winner(),
-                                                       match.get_winner_as_numeric()),
+                "{},{},{},{},{},{},{},{},{},{},{},{}".format(league.year,
+                                                             jornada.id,
+                                                             match.date,
+                                                             match.stadium,
+                                                             match.team_A,
+                                                             match.logo_team_A,
+                                                             match.team_B,
+                                                             match.logo_team_B,
+                                                             match.score_team_A,
+                                                             match.score_team_B,
+                                                             match.get_winner(),
+                                                             match.get_winner_as_numeric()),
                 file=f)
 
 
@@ -62,7 +74,16 @@ def handle_jornada(year):
     jornadas = []
     url = base_url.format(year)
     print("Using url:", url)
-    page = urlopen(url)
+
+    # https://www.google.com/search?q=my+user+agent&oq=my+user+agent
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
+    req = urllib.request.Request(url, headers={'User-Agent': user_agent})
+    try:
+        page = urlopen(req)
+    except:
+        print('Something went wrong retrieving data')
+        sys.exit(-1)
+
     soup = BeautifulSoup(page.read(), "html.parser")
     try:
         contenedor_jornadas = soup.find('div',
@@ -82,13 +103,66 @@ def handle_jornada(year):
     return jornadas
 
 
-def main():
-    for i in range(1929, 1936):
+def check_logos_directory():
+    if not os.path.isdir(logos_folder_name):
+        os.makedirs(logos_folder_name)
+
+
+def get_data():
+    check_logos_directory()
+    for i in range(1929, 2021):
         print("Getting year", i)
         league = League(i, handle_jornada(i))
         league_to_csv(league)
         time.sleep(5)
 
 
+def selenium_example():
+    # https://sites.google.com/a/chromium.org/chromedriver/downloads
+    browser = webdriver.Chrome(executable_path=r"./chromedriver_78.exe")
+    browser.get("http://www.resultados-futbol.com")
+    browser.find_element_by_class_name("qc-cmp-button").click()
+    browser.find_element_by_class_name("qc-cmp-secondary-button").click()
+    browser.find_element_by_class_name("qc-cmp-save-and-exit").click()
+    time.sleep(2)
+
+    browser.find_element_by_id("login_a").click()
+    browser.find_element_by_id("user_nameL").send_keys("scraper")
+    browser.find_element_by_id("passwordL").send_keys("scraper")
+
+    # https://stackoverflow.com/questions/8832858/using-python-bindings-selenium-webdriver-click-is-not-working-sometimes
+    browser.find_element_by_id("iniciosesion").send_keys("\n")
+    time.sleep(2)
+
+    browser.find_element_by_id("swithSessWindow").click()
+    browser.find_element_by_link_text('Ir a mi perfil').click()
+
+    info = browser.find_element_by_id("info").text.split()
+    username = info[0]
+    print('Username', username)
+    isConnected = info[1] == 'Conectado'
+    print('Is Connected?', isConnected)
+
+    points = browser.find_element_by_class_name("points").text
+    print('Points', points)
+
+    ncomments = browser.find_element_by_class_name("ncomments").text
+    print('ncomments', ncomments)
+
+    nfriends = browser.find_element_by_class_name("nfriends").text
+    print('nfriends', nfriends)
+
+
+def main():
+    # selenium_example()
+    get_data()
+
+
 if __name__ == '__main__':
+    logos_folder_name = 'logos'
+    f = open('football_spanish_league.csv', "w", encoding="utf8")
+    print(
+        "year,jornada,date,stadium,teamA,logo_teamA,teamB,logo_teamB,scoreTeamA,scoreTeamB,winner,winnerAsNumeric",
+        file=f)
     main()
+    f.close()
