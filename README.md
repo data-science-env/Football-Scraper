@@ -142,15 +142,18 @@ que se segueix tenint permís per extraure les dades del web.
 </tr>
  ```
  
-Com podem observar l'estructura és ben clara. El **primer** element 
-marcat amb *class="fecha"* correspon a data en la qual es va jugar el 
-partit de futbol. El **segon** element marcat amb *class="equipo1"* 
-conté la informació de l'equip 1. En aquest cas s'ha agafat el nom de 
-l'equip juntament amb el seu escut (logo). El **tercer** element marcat 
-amb *class="rstd"* conté informació del partit. D'aquest element s'ha 
-agafat l'estadi on es va disputar el partit i el resultat. El **quart** 
-element marcat amb *class="equipo2"* segueix el mateix esquema que 
-l'equip 1. Per últim apareix el nombre de comentaris que s'ha fet 
+Com podem observar l'estructura és ben clara i segueix el següent esquema:
+1. El primer element marcat amb *class="fecha"* correspon a data 
+en la qual es va jugar el partit de futbol.
+2. El segon element marcat amb *class="equipo1"* conté la i
+nformació de l'equip 1. En aquest cas s'ha agafat el nom de l'equip 
+juntament amb el seu escut (logo).
+3. El tercer element marcat amb *class="rstd"* conté informació 
+del partit. D'aquest element s'ha agafat l'estadi on es va 
+disputar el partit i el resultat.
+4. El quart element marcat amb *class="equipo2"* segueix el 
+mateix esquema que l'equip 1.
+5. Per últim apareix el nombre de comentaris que s'ha fet 
 sobre el partit els quals no s'han agafat, ja que no apareixen enlloc.
  
 ## Contingut dataset
