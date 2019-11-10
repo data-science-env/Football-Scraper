@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 import time
@@ -132,7 +133,7 @@ def selenium_example():
 
     # https://stackoverflow.com/questions/8832858/using-python-bindings-selenium-webdriver-click-is-not-working-sometimes
     browser.find_element_by_id("iniciosesion").send_keys("\n")
-    time.sleep(2)
+    time.sleep(5)
 
     browser.find_element_by_id("swithSessWindow").click()
     browser.find_element_by_link_text('Ir a mi perfil').click()
@@ -154,11 +155,17 @@ def selenium_example():
 
 
 def main():
-    # selenium_example()
-    get_data()
+    if args.selenium: selenium_example()
+    if not args.no_data: get_data()
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Web scraper to get data from a website.')
+
+    parser.add_argument('--selenium', help='Launch Selenium example', action='store_true')
+    parser.add_argument('--no_data', help='Get data with the scraper', action='store_true')
+    args = parser.parse_args()
+
     logos_folder_name = 'logos'
     f = open('football_spanish_league.csv', "w", encoding="utf8")
     print(

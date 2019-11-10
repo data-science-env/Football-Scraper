@@ -25,6 +25,51 @@ necessàries per la realització d'aquesta pràctica. S'ha de dir que ofereixen
 una API de pagament per fer consultes directes de les dades, però com bé s'ha
 dit, en aquest cas es farà ús d'un web scraper per la recol·lecció de les dades.
 
+### Membres del grup
+L'activitat ha estat realitzada de manera individual per Albert Eduard Merino Pulido.
+
+### Fitxers i carpetes del projecte
+
+#### Estructura
+Football-Scraper  
+├── chromedriver_78.exe  
+├── football_spanish_league.csv  
+├── logos  
+│   ├── equip1.jpg  
+│   ├── equip2.jpg  
+│   ├── equipN.jpg  
+├── models.py  
+├── README.md  
+├── requirements.txt  
+└── scraper.py  
+
+#### Descripció
+* `chromedriver_78.exe` s'utilitza per a executar l'exemple de Selinux.
+* `football_spanish_league.csv` dataset generat.
+* `logos` es la carpeta que conté els logos dels diferents equips en 
+format jpg
+* `models.py` conté les diferents classes utilitzades per representar
+el objectes de Equip, Jornada i Lliga.
+* `README.md` conté l'informació del projecte.
+* `requirements.txt` conté les dependencies per poder executar el projecte.
+* `scraper.py` conté el proces principal per generar el dataset.
+
+### Executar el web scraper
+``` bash
+# Crear i activar un entorn virtual
+virtualenv env
+source env/bin/activate
+
+# Instal·lar les dependencies de projecte
+pip install -r requirements.txt
+
+# Executar scraper
+python scraper.py [-h] [--selenium] [--no_data]
+```
+Arguments:
+* -h, --help  mostra un missatge d'ajuda
+* --selenium  Indica si volem executar el codi de Selenium
+* --no_data   Indica si no volem agafar dades
 
 ## Robots.txt
 Durant la realització d'aquesta pràctica, el fitxer 
@@ -70,7 +115,7 @@ que se segueix tenint permís per extraure les dades del web.
  
 ## Estructura HTML d'un partit
  
- ```
+ ``` html
 <tr class="vevent">
     <td class="fecha">10 Feb 29</td>
     <td class="equipo1">
@@ -105,7 +150,8 @@ sobre el partit els quals no s'han agafat, ja que no apareixen enlloc.
 El dataset generat conté les dades dels partits de futbol de la lliga espanyola
 des de la temporada 1929 fins a la temporada 2020. Cal destacar que no hi han
 dades dels anys 1937, 1938, i 1939, ja que a causa de la guerra civil que va patir
-Espanya no va haver-hi lliga.
+Espanya no va haver-hi lliga. El nom escollit per al dataset ha estat 
+`football_spanish_league.csv`
  
 A continuació es mostren les capçaleres del dataset juntament amb el tipus de valor que contenen.
  
@@ -127,6 +173,8 @@ el dataset surten representats amb el nom del fitxer que conte la imatge.
 A la carpeta logos, estan tots els logos dels diferents equips. Els logos
 segueixen tots el format nom_equip.jpg, per exemple, el fitxer amb el 
 logo l'equip Eibar s'anomena Eibar.jpg.
+
+## 
 
 ## Aspectes a destacar
 
@@ -159,7 +207,7 @@ el qual deixo en aquesta mateixa carpeta.
 
 ## Llicencia
 
-El dataset generat en el fitxer **football_spanish_league.csv** està subjecte a la següent llicencia [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+El dataset generat en el fitxer `football_spanish_league.csv` està subjecte a la següent llicencia [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 S'ha escollit aquesta llicència d'acord amb les seves característiques.
 Com podem veure aquesta llicència permet que es comparteixi
