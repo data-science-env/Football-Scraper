@@ -28,6 +28,10 @@ dit, en aquest cas es farà ús d'un web scraper per la recol·lecció de les da
 ### Membres del grup
 L'activitat ha estat realitzada de manera individual per Albert Eduard Merino Pulido.
 
+### Enllaç al projecte
+
+https://github.com/data-science-env/Football-Scraper
+
 ### Fitxers i carpetes del projecte
 
 #### Estructura
@@ -39,6 +43,7 @@ Football-Scraper
 │   ├── equip2.jpg  
 │   ├── equipN.jpg  
 ├── models.py  
+├── PRA1-Web Scraping.pdf  
 ├── README.md  
 ├── requirements.txt  
 └── scraper.py  
@@ -50,6 +55,7 @@ Football-Scraper
 format jpg
 * `models.py` conté les diferents classes utilitzades per representar
 el objectes de Equip, Jornada i Lliga.
+* `PRA1-Web Scraping.pdf` 
 * `README.md` conté l'informació del projecte.
 * `requirements.txt` conté les dependencies per poder executar el projecte.
 * `scraper.py` conté el proces principal per generar el dataset.
@@ -174,8 +180,6 @@ A la carpeta logos, estan tots els logos dels diferents equips. Els logos
 segueixen tots el format nom_equip.jpg, per exemple, el fitxer amb el 
 logo l'equip Eibar s'anomena Eibar.jpg.
 
-## 
-
 ## Aspectes a destacar
 
 * S'han modificat les capçaleres del scraper per tal de fer-nos 
@@ -213,7 +217,15 @@ S'ha escollit aquesta llicència d'acord amb les seves característiques.
 Com podem veure aquesta llicència permet que es comparteixi
 adaptacions de les dades sempre que aquestes es comparteixin de la mateixa
 manera. S'ha decidit que al ser dades extretes per a la resolució d'una
-pràctica estudiantil, aquestes dades no tinguis permís per ser utilitzades amb fins
+pràctica en un àmbit estudiantil, no es doni permís per ser utilitzades amb fins
 comercials.
 
 ![alt text](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
+
+## Contribucions en el projecte
+
+|       Contribucions       | Signa |
+|:-------------------------:|:-----:|
+|       Recerca prèvia      |  AMP  |
+| Redacció de les respostes |  AMP  |
+|    Desenvolupament codi   |  AMP  |
