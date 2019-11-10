@@ -157,3 +157,15 @@ de descarregar un driver de Chorme des del següent
 En el meu cas he descarregat el driver per a la versió 78 de Chrome 
 el qual deixo en aquesta mateixa carpeta.
 
+## Llicencia
+
+El dataset generat en el fitxer **football_spanish_league.csv** està subjecte a la següent llicencia [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+S'ha escollit aquesta llicència d'acord amb les seves característiques.
+Com podem veure aquesta llicència permet que es comparteixi
+adaptacions de les dades sempre que aquestes es comparteixin de la mateixa
+manera. S'ha decidit que al ser dades extretes per a la resolució d'una
+pràctica estudiantil, aquestes dades no tinguis permís per ser utilitzades amb fins
+comercials.
+
+![alt text](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
